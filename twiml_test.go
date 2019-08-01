@@ -58,7 +58,7 @@ func TestDialNumber(t *testing.T) {
 
 func TestDialConference(t *testing.T) {
 	r := NewResponse()
-	r.Dial(&DialAttr{}).Conference("Dummy Conference", &ConferenceAttr{Record: "do-not-record"})
+	r.Dial(&DialAttr{}).Conference("Conference", &ConferenceAttr{Record: "do-not-record"})
 
 	var b bytes.Buffer
 	err := r.ToXML(&b)
@@ -66,7 +66,7 @@ func TestDialConference(t *testing.T) {
 		t.Errorf("Unexpected error: %s", err)
 	}
 
-	expected := "<Response>\n  <Dial>\n    <Conference record=\"do-not-record\">Dummy Conference</Conference>\n  </Dial>\n</Response>"
+	expected := "<Response>\n  <Dial>\n    <Conference record=\"do-not-record\">Conference</Conference>\n  </Dial>\n</Response>"
 	actual := b.String()
 	if expected != actual {
 		t.Errorf("Expected \"%s\" but got \"%s\"", expected, actual)
