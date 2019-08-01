@@ -162,6 +162,14 @@ func (d *Dial) Number(value string, attr *NumberAttr) {
 	})
 }
 
+// Conference ...
+func (d *Dial) Conference(value string, attr *ConferenceAttr) {
+	d.Nouns = append(d.Nouns, &Conference{
+		Value:          value,
+		ConferenceAttr: *attr,
+	})
+}
+
 // Client ...
 func (d *Dial) Client(value string, attr *ClientAttr) {
 	d.Nouns = append(d.Nouns, &Client{
@@ -325,6 +333,30 @@ type Sip struct {
 
 // Conference ...
 type Conference struct {
+	XMLName xml.Name `xml:"Conference"`
+	Value   string   `xml:",chardata"`
+	ConferenceAttr
+}
+
+// ConferenceAttr ...
+type ConferenceAttr struct {
+	Muted                         bool   `xml:"muted,attr,omitempty"`
+	Beep                          string `xml:"beep,attr,omitempty"`
+	StartConferenceOnEnter        bool   `xml:"startConferenceOnEnter,attr,omitempty"`
+	EndConferenceOnExit           bool   `xml:"endConferenceOnExit,attr,omitempty"`
+	WaitURL                       string `xml:"waitUrl,attr,omitempty"`
+	WaitMethod                    string `xml:"waitMethod,attr,omitempty"`
+	MaxParticipants               uint8  `xml:"maxParticipants,attr,omitempty"`
+	Record                        string `xml:"record,attr,omitempty"`
+	Region                        string `xml:"region,attr,omitempty"`
+	Trim                          string `xml:"trim,attr,omitempty"`
+	StatusCallbackEvent           string `xml:"statusCallbackEvent,attr,omitempty"`
+	StatusCallback                string `xml:"statusCallback,attr,omitempty"`
+	StatusCallbackMethod          string `xml:"statusCallbackMethod,attr,omitempty"`
+	RecordingStatusCallbackEvent  string `xml:"recordingStatusCallbackEvent,attr,omitempty"`
+	RecordingStatusCallback       string `xml:"recordingStatusCallback,attr,omitempty"`
+	RecordingStatusCallbackMethod string `xml:"recordingStatusCallbackMethod,attr,omitempty"`
+	EventCallbackURL              string `xml:"eventCallbackUrl,attr,omitempty"`
 }
 
 // Queue ...
