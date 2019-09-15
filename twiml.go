@@ -95,10 +95,6 @@ func (r *Response) Reject(attr *RejectAttr) *Reject {
 	return rj
 }
 
-// Queue ...
-type Queue struct {
-}
-
 // Pause ...
 func (r *Response) Pause(attr *PauseAttr) {
 	r.add(&Pause{
