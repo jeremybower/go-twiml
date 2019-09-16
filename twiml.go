@@ -75,6 +75,26 @@ func (r *Response) Hangup() {
 	r.add(&Hangup{})
 }
 
+// Reject ...
+type Reject struct {
+	XMLName xml.Name `xml:"Reject"`
+	Value   string   `xml:",chardata"`
+	RejectAttr
+}
+
+// RejectAttr ...
+type RejectAttr struct {
+}
+
+// Reject ...
+func (r *Response) Reject(attr *RejectAttr) *Reject {
+	rj := &Reject{
+		RejectAttr: *attr,
+	}
+	r.add(rj)
+	return rj
+}
+
 // Pause ...
 func (r *Response) Pause(attr *PauseAttr) {
 	r.add(&Pause{

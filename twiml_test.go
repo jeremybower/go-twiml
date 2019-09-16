@@ -141,6 +141,24 @@ func TestHangup(t *testing.T) {
 	}
 }
 
+func TestReject(t *testing.T) {
+	r := NewResponse()
+	r.Reject(&RejectAttr{})
+
+	var b bytes.Buffer
+	err := r.ToXML(&b)
+	if err != nil {
+		t.Errorf("Unexpected error: %s", err)
+	}
+
+	expected := "<Response>\n  <Reject></Reject>\n</Response>"
+	actual := b.String()
+
+	if expected != actual {
+		t.Errorf("Expected \"%s\" but got \"%s\"", expected, actual)
+	}
+}
+
 func TestPause(t *testing.T) {
 	r := NewResponse()
 	r.Pause(&PauseAttr{})
